@@ -9,9 +9,12 @@ React Lightbox is a React plugin for implementing lightbox effect easily with Re
 
 # Demo
 [Basic usage](http://howtomakeaturn.github.io/react-lightbox/basic.html)
-[Passing variable](href="http://howtomakeaturn.github.io/react-lightbox/pass-variable.html)
-[Custome elements](href="http://howtomakeaturn.github.io/react-lightbox/custom-element.html)
-[Communication between elemetns](href="http://howtomakeaturn.github.io/react-lightbox/communication-between-elements.html)
+
+[Passing variable](http://howtomakeaturn.github.io/react-lightbox/pass-variable.html)
+
+[Custome elements](http://howtomakeaturn.github.io/react-lightbox/custom-element.html)
+
+[Communication between elemetns](http://howtomakeaturn.github.io/react-lightbox/communication-between-elements.html)
 
 # Documentation
 
