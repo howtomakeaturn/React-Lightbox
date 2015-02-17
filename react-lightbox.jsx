@@ -45,6 +45,15 @@ var LightboxModal = React.createClass({
         padding: '11px 3px',
         textDecoration: 'none'
     },
+
+    componentDidMount: function(){
+        document.addEventListener("keydown", function (e) {
+            if ( (this.props.display) && (e.keyCode === 27) ){
+                this.props.closeLightbox();
+            }
+        }.bind(this));        
+    },
+
     render: function(){
         
         for (j in this.props){
@@ -56,7 +65,7 @@ var LightboxModal = React.createClass({
         if (this.props.display){            
             return (
                 <div>
-                    <div style={this.blackOverlayStyles} />
+                    <div style={this.blackOverlayStyles} onClick={this.props.closeLightbox} />
                     <div style={this.whiteContentStyles}>                        
                         <a style={this.closeTagStyles} onClick={this.props.closeLightbox}>&times;</a>
                         {this.props.children}
