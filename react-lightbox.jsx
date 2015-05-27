@@ -2,12 +2,12 @@
 
 // CSS from http://stackoverflow.com/questions/19064987/html-css-popup-div-on-text-click
 // and http://stackoverflow.com/questions/10019797/pure-css-close-button
-var LightboxModal = React.createClass({                
+var LightboxModal = React.createClass({
 
     whiteContentStyles: {
         position: 'fixed',
         top: '25%',
-        left: '30%',   
+        left: '30%',
         right: '30%',
         backgroundColor: '#fff',
         color: '#7F7F7F',
@@ -18,7 +18,7 @@ var LightboxModal = React.createClass({
         zIndex:'101'
     },
 
-    blackOverlayStyles: {            
+    blackOverlayStyles: {
         background: 'black',
         opacity: '.5',
         position: 'fixed',
@@ -51,22 +51,21 @@ var LightboxModal = React.createClass({
             if ( (this.props.display) && (e.keyCode === 27) ){
                 this.props.closeLightbox();
             }
-        }.bind(this));        
+        }.bind(this));
     },
 
     render: function(){
-        
-        for (j in this.props){
+        for (var j in this.props){
             if (j !== 'children'){
-                this.props.children.props[j] = this.props[j];                
+                this.props.children.props[j] = this.props[j];
             }
         }
-        
-        if (this.props.display){            
+
+        if (this.props.display){
             return (
                 <div>
                     <div style={this.blackOverlayStyles} onClick={this.props.closeLightbox} />
-                    <div style={this.whiteContentStyles}>                        
+                    <div style={this.whiteContentStyles}>
                         <a style={this.closeTagStyles} onClick={this.props.closeLightbox}>&times;</a>
                         {this.props.children}
                     </div>
@@ -75,16 +74,16 @@ var LightboxModal = React.createClass({
         } else {
             return (<div></div>);
         }
-    }            
-});    
+    }
+});
 
 
 var LightboxTrigger = React.createClass({
     render: function(){
         this.props.children.props.onClick = this.props.openLightbox;
-        for (j in this.props){
+        for (var j in this.props){
             if (j !== 'children'){
-                this.props.children.props[j] = this.props[j];                
+                this.props.children.props[j] = this.props[j];
             }
         }
         return this.props.children;
@@ -97,36 +96,39 @@ var Lightbox = React.createClass({
     getInitialState: function(){
         return { display: false };
     },
-    
+
     componentWillMount: function(){
-        this.setState(this.props.data);
+        if (this.props.data)
+            this.setState(this.props.data);
     },
-    
+
     openLightbox: function(){
         this.setState({display: true});
     },
-    
+
     closeLightbox: function(){
         this.setState({display: false});
     },
-    
+
     setLightboxState: function(obj){
         this.setState(obj);
     },
 
-    render: function(){                            
-        for(i in this.props.children){
-            this.props.children[i].props.openLightbox = this.openLightbox;
-            this.props.children[i].props.closeLightbox = this.closeLightbox;
-            this.props.children[i].props.setLightboxState = this.setLightboxState;
-            for (j in this.state){
-                this.props.children[i].props[j] = this.state[j];                
-            }
-        }
+    render: function(){
+        var childrenWithProps = this.props.children.map(function(child, i) {
+            var childWithProps = React.addons.cloneWithProps(child, {
+                openLightbox: this.openLightbox,
+                closeLightbox: this.closeLightbox,
+                display: this.state.display,
+                key: i
+            });
+            return childWithProps;
+        }, this);
+
         return (
             <div>
-                {this.props.children}
+                {childrenWithProps}
             </div>
         );
-    }            
+    }
 });
