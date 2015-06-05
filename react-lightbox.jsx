@@ -116,12 +116,16 @@ var Lightbox = React.createClass({
 
     render: function(){
         var childrenWithProps = this.props.children.map(function(child, i) {
-            var childWithProps = React.addons.cloneWithProps(child, {
+            var childProps = {
                 openLightbox: this.openLightbox,
                 closeLightbox: this.closeLightbox,
-                display: this.state.display,
+                setLightboxState: this.setLightboxState,
                 key: i
-            });
+            };
+            for (var j in this.state){
+                childProps[j] = this.state[j];
+            }
+            var childWithProps = React.addons.cloneWithProps(child, childProps);
             return childWithProps;
         }, this);
 
