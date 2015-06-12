@@ -23,7 +23,7 @@ To use the lightbox plugin, include the react library, the JSX transformer, and 
 ```html
 <head>
     <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.12.0/JSXTransformer.js'></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.12.0/react.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.12.0/react-with-addons.js'></script>
     <script type="text/jsx" src='react-lightbox.jsx'></script>    
 </head>
 ```
